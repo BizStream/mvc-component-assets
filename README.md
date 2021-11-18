@@ -58,6 +58,8 @@ public class MyViewComponent : ViewComponent
 @* ... *@
 
 <body>
+  @(await Component.InvokeAsync<MyViewComponent>())
+
   <view-component-scripts />
 </body>
 ```
