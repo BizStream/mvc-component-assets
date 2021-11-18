@@ -1,0 +1,23 @@
+﻿@using BizStream.AspNetCore.ViewComponentAssets.Tests.Components
+
+@addTagHelper *, BizStream.AspNetCore.ViewComponentAssets
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+</head>
+
+<body>
+	<main>
+		@(await Component.InvokeAsync<TestComponent1>())
+		@(await Component.InvokeAsync<TestComponent2>())
+		@(await Component.InvokeAsync<TestAsyncComponent>())
+	</main>
+
+	<view-component-scripts />
+</body>
+
+
+</html>

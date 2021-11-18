@@ -1,0 +1,27 @@
+<Project>
+    <ItemGroup>
+        <PackageReference Include="BizStream.NET.Sdk" Version="1.0.1" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup Condition=" '$(IsTestProject)' == 'true' ">
+        <FrameworkReference Include="Microsoft.AspNetCore.App" Condition=" '$(TargetFramework)' == 'net6.0' " />
+
+        <PackageReference Include="BizStream.NET.Tests.Sdk" Version="1.0.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.*" Condition=" '$(TargetFramework)' == 'netcoreapp3.1' " />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.*" Condition=" '$(TargetFramework)' == 'net5.0' " />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.*" Condition=" '$(TargetFramework)' == 'net6.0' " />
+        <PackageReference Include="xunit" Version="2.4.*" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.*">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <Target Name="SetRepositoryGitMetadata" BeforeTargets="GenerateNuspec;Pack" DependsOnTargets="GitInfo">
+        <PropertyGroup>
+            <RepositoryBranch>$(GitBranch)</RepositoryBranch>
+            <RepositoryCommit>$(GitCommit)</RepositoryCommit>
+        </PropertyGroup>
+    </Target>
+
+</Project>

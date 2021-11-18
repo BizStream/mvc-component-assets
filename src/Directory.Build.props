@@ -1,0 +1,21 @@
+<Project>
+
+    <PropertyGroup>
+        <!-- Create a property to easily reference the root of the `src` folder -->
+        <SourceDirectory>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))</SourceDirectory>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <TargetFrameworks>netcoreapp3.1;net5.0;net6.0;</TargetFrameworks>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <RepositoryUrl>https://github.com/BizStream/mvc-component-assets.git</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>asp.net-core;razor</PackageTags>
+    </PropertyGroup>
+
+</Project>
