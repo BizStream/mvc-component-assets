@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-        <PackageReadmeFile>$(SourceDirectory)\..\README.md</PackageReadmeFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <VersionPrefix>0.0.1</VersionPrefix>
     </PropertyGroup>
 
@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="$(PackageReadmeFile)" />
+        <None Include="$(SourceDirectory)\..\README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
 </Project>

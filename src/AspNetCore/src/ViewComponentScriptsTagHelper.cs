@@ -11,8 +11,11 @@ namespace BizStream.AspNetCore.ViewComponentAssets
     public class ViewComponentScriptsTagHelper : TagHelper
     {
         #region Properties
+
+        /// <summary> The HTML Tag name used by this TagHelper. </summary>
         public const string TagName = "view-component-scripts";
 
+        /// <summary> The current <see cref="ViewContext"/>. </summary>
         [HtmlAttributeNotBound]
         [ViewContext]
         public ViewContext ViewContext { get; set; } = default!;

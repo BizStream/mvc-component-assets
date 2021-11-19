@@ -15,6 +15,11 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Tests.Abstractions
 
         public static async Task<IHtmlDocument?> GetDocumentAsync( HttpResponseMessage response, CancellationToken cancellation = default )
         {
+            if( response is null )
+            {
+                throw new ArgumentNullException( nameof( response ) );
+            }
+
             using var content = await response.Content.ReadAsStreamAsync();
             var document = await BrowsingContext.New()
                 .OpenAsync( ResponseFactory, cancellation );
