@@ -11,7 +11,9 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Tests
         #endregion
 
         public ViewComponentScriptsTagHelperTests( AssetsWebApplicationFactory factory )
-            => this.factory = factory;
+        {
+            this.factory = factory;
+        }
 
         [Fact]
         public async Task ViewComponentScriptsTagHelper_RendersScriptElements( )
@@ -24,7 +26,7 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Tests
             var document = await HtmlHelpers.GetDocumentAsync( response );
 
             var scripts = document?.QuerySelectorAll( "script" );
-            Assert.True( scripts?.Length == 3 );
+            Assert.True( scripts?.Length is 3 );
         }
 
     }

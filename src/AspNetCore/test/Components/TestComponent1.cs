@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BizStream.AspNetCore.ViewComponentAssets.Annotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BizStream.AspNetCore.ViewComponentAssets.Tests.Components
 {
@@ -6,6 +7,8 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Tests.Components
     public class TestComponent1 : ViewComponent
     {
         public IViewComponentResult Invoke( )
-            => Content( string.Empty );
+        {
+            return Content( string.Empty );
+        }
     }
 }

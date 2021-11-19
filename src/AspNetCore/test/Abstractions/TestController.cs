@@ -5,6 +5,9 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Tests.Abstractions
     public class TestController : Controller
     {
         [HttpGet( "" )]
-        public IActionResult Index( ) => View();
+        public IActionResult Index( )
+        {
+            return View();
+        }
     }
 }
