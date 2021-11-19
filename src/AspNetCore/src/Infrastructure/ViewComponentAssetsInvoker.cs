@@ -34,11 +34,6 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
         private void ExposeViewComponentAssets( ViewComponentContext context )
         {
             var assets = assetsDescriptorProvider.GetAssetsDescriptor( context.ViewComponentDescriptor );
-            if( assets is null )
-            {
-
-            }
-
             context.ViewContext.AddViewComponentScripts( assets.Scripts );
         }
 

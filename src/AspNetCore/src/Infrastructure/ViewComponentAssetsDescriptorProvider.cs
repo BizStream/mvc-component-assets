@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
 {
+    /// <summary> Default implementation of an <see cref="IViewComponentAssetsDescriptorProvider"/>, based on a <see cref="ConcurrentDictionary{TKey, TValue}"/> for caching reflection. </summary>
     public class ViewComponentAssetsDescriptorProvider : IViewComponentAssetsDescriptorProvider
     {
         #region Fields
@@ -17,12 +18,17 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
             descriptors = new ConcurrentDictionary<string, ViewComponentAssetsDescriptor>();
         }
 
-        private static ViewComponentAssetsDescriptor CreateAssetsDescriptor( ViewComponentDescriptor descriptor )
+        private static ViewComponentAssetsDescriptor CreateAssetsDescriptor( string id, ViewComponentDescriptor descriptor )
         {
+            if( id != descriptor.Id )
+            {
+                throw new ArgumentException( $"{nameof( id )} and {nameof( descriptor )}.{nameof( descriptor.Id )} must match." );
+            }
+
             var assets = descriptor.TypeInfo?.GetCustomAttributes<ViewComponentAssetAttribute>( true )
                 ?? Enumerable.Empty<ViewComponentAssetAttribute>();
 
-            return new()
+            return new( id )
             {
                 Scripts = assets.OfType<ViewComponentScriptAttribute>()
                     .Select( asset => asset.Path )
@@ -30,6 +36,8 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
             };
         }
 
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentNullException"/>
         public ViewComponentAssetsDescriptor GetAssetsDescriptor( ViewComponentDescriptor descriptor )
         {
             if( descriptor is null )
@@ -37,7 +45,7 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
                 throw new ArgumentNullException( nameof( descriptor ) );
             }
 
-            return descriptors.GetOrAdd( descriptor.Id, ( _, desc ) => CreateAssetsDescriptor( desc ), descriptor );
+            return descriptors.GetOrAdd( descriptor.Id, CreateAssetsDescriptor, descriptor );
         }
     }
 }
