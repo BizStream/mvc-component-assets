@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BizStream.AspNetCore.ViewComponentAssets
 {
+    /// <summary> A <see cref="TagHelper"/> that provides a custom HTML element that renders <c>script</c> elements for any <see cref="ViewComponent"/>s that have been rendered thus far. </summary>
     [HtmlTargetElement( TagName, TagStructure = TagStructure.WithoutEndTag )]
     public class ViewComponentScriptsTagHelper : TagHelper
     {
@@ -21,10 +23,10 @@ namespace BizStream.AspNetCore.ViewComponentAssets
         {
             output.TagName = string.Empty;
 
-            var scriptPaths = ViewContext.GetViewComponentScripts();
-            if( scriptPaths?.Any() is true )
+            var scripts = ViewContext.GetViewComponentScripts();
+            if( scripts?.Any() is true )
             {
-                foreach( var path in scriptPaths )
+                foreach( var path in scripts )
                 {
                     var script = new TagBuilder( "script" );
                     script.Attributes.Add( "src", path );

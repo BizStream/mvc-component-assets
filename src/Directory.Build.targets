@@ -1,10 +1,11 @@
 <Project>
+
     <ItemGroup>
         <PackageReference Include="BizStream.NET.Sdk" Version="1.0.1" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup Condition=" '$(IsTestProject)' == 'true' ">
-        <FrameworkReference Include="Microsoft.AspNetCore.App" Condition=" '$(TargetFramework)' == 'net6.0' " />
+        <FrameworkReference Include="Microsoft.AspNetCore.App" Condition=" '$(TargetFramework)' == 'net6.0' "  />
 
         <PackageReference Include="BizStream.NET.Tests.Sdk" Version="1.0.2" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.*" Condition=" '$(TargetFramework)' == 'netcoreapp3.1' " />

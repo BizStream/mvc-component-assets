@@ -11,6 +11,8 @@ namespace BizStream.AspNetCore.ViewComponentAssets
         private static readonly Type IViewComponentInvokerFactoryType = typeof( IViewComponentInvokerFactory );
         #endregion
 
+        /// <summary> Registers services required to support ViewComponent Assets. </summary>
+        /// <exception cref="ArgumentNullException"/>
         public static IMvcBuilder AddViewComponentAssets( this IMvcBuilder builder )
         {
             if( builder is null )

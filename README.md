@@ -47,7 +47,7 @@ using Microsoft.AspNetCore.Mvc;
 [ViewComponentScript("/scripts/my-view-component.js")]
 public class MyViewComponent : ViewComponent
 {
-  // ...
+    public override IViewComponentResult Invoke( ) => Content( "Hello, World!" );
 }
 ```
 
@@ -68,6 +68,8 @@ public class MyViewComponent : ViewComponent
 
 ```html
 <body>
+  Hello, World!  
+
   <script src="/scripts/my-view-component.js" />
 </body>
 ```

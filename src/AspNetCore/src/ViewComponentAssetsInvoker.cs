@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace BizStream.AspNetCore.ViewComponentAssets
 {
+    /// <summary> Implementation of an <see cref="IViewComponentInvoker"/> that tracks <see cref="ViewComponent"/> assets to the <see cref="ViewComponentContext.ViewContext"/>. </summary>
     public class ViewComponentAssetsInvoker : IViewComponentInvoker
     {
         #region Fields

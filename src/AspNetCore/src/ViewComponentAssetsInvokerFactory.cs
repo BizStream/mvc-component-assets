@@ -2,6 +2,7 @@
 
 namespace BizStream.AspNetCore.ViewComponentAssets
 {
+    /// <summary> Implementation of an <see cref="IViewComponentInvokerFactory"/> that creates instances of <see cref="ViewComponentAssetsInvoker"/>. </summary>
     public class ViewComponentAssetsInvokerFactory : IViewComponentInvokerFactory
     {
         #region Fields

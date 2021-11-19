@@ -1,11 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-    
+
     <PropertyGroup>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+        <PackageReadmeFile>$(SourceDirectory)\..\README.md</PackageReadmeFile>
         <VersionPrefix>0.0.1</VersionPrefix>
     </PropertyGroup>
 
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
     </ItemGroup>
-    
+
+    <ItemGroup>
+        <None Include="$(PackageReadmeFile)" />
+    </ItemGroup>
+
 </Project>

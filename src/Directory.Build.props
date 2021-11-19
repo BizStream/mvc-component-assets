@@ -15,7 +15,7 @@
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryUrl>https://github.com/BizStream/mvc-component-assets.git</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageTags>asp.net-core;razor</PackageTags>
+        <PackageTags>asp.net-core;razor;viewcomponent</PackageTags>
     </PropertyGroup>
 
 </Project>
