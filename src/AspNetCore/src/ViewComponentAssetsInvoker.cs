@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using BizStream.AspNetCore.ViewComponentAssets.Annotations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
@@ -21,16 +23,19 @@ namespace BizStream.AspNetCore.ViewComponentAssets
             this.defaultInvoker = defaultInvoker;
         }
 
-        // TODO: A provider/custom 'Descriptor' that provides caching of reflection/enumerating?
-        private static void AddViewComponentScripts( ViewComponentContext context )
+        private static void ExposeViewComponentAssets( ViewComponentContext context )
         {
-            var scriptAttributes = context.ViewComponentDescriptor.TypeInfo.GetCustomAttributes<ViewComponentScriptAttribute>();
-            if( scriptAttributes?.Any() is true )
-            {
-                context.ViewContext.AddViewComponentScripts(
-                    scriptAttributes.Select( bundleAttribute => bundleAttribute.Path )
-                );
-            }
+            context.ViewContext.AddViewComponentScripts(
+                GetViewComponentAssetPaths<ViewComponentScriptAttribute>( context.ViewComponentDescriptor )
+            );
+        }
+
+        private static IEnumerable<PathString> GetViewComponentAssetPaths<TAssetAttribute>( ViewComponentDescriptor descriptor )
+            where TAssetAttribute : ViewComponentAssetAttribute
+        {
+            // TODO: A provider/custom 'Descriptor' that provides caching of reflection/enumerating?
+            return descriptor.TypeInfo.GetCustomAttributes<TAssetAttribute>( true )
+                .Select( assetAttribute => assetAttribute.Path );
         }
 
         /// <inheritdoc/>
@@ -42,8 +47,7 @@ namespace BizStream.AspNetCore.ViewComponentAssets
             }
 
             await defaultInvoker.InvokeAsync( context );
-
-            AddViewComponentScripts( context );
+            ExposeViewComponentAssets( context );
         }
     }
 }

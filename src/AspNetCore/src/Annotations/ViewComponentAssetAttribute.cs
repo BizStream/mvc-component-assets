@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BizStream.AspNetCore.ViewComponentAssets
+namespace BizStream.AspNetCore.ViewComponentAssets.Annotations
 {
-    /// <summary> Annotates a <see cref="ViewComponent"/> with an association to a static JavaScript asset. </summary>
+    /// <summary> Base class for an attribute that annotates a <see cref="ViewComponent"/> with an association to a static asset. </summary>
     [AttributeUsage( AttributeTargets.Class )]
-    public class ViewComponentScriptAttribute : Attribute
+    public abstract class ViewComponentAssetAttribute : Attribute
     {
         #region Fields
         private readonly string path;
@@ -17,7 +17,7 @@ namespace BizStream.AspNetCore.ViewComponentAssets
         public PathString Path => path;
         #endregion
 
-        public ViewComponentScriptAttribute( string path )
+        protected ViewComponentAssetAttribute( string path )
         {
             if( string.IsNullOrEmpty( path ) || path == "/" )
             {
