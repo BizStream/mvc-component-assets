@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ViewComponents;
+﻿using BizStream.AspNetCore.ViewComponentAssets.Infrastructure;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
-namespace BizStream.AspNetCore.ViewComponentAssets
+namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
 {
     /// <summary> Implementation of an <see cref="IViewComponentInvoker"/> that tracks <see cref="ViewComponent"/> assets to the <see cref="ViewComponentContext.ViewContext"/>. </summary>
     public class ViewComponentAssetsInvoker : IViewComponentInvoker

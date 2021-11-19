@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewComponents;
 
-namespace BizStream.AspNetCore.ViewComponentAssets
+namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
 {
     /// <summary> Implementation of an <see cref="IViewComponentInvokerFactory"/> that creates instances of <see cref="ViewComponentAssetsInvoker"/>. </summary>
     public class ViewComponentAssetsInvokerFactory : IViewComponentInvokerFactory

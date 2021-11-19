@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using BizStream.AspNetCore.ViewComponentAssets.Infrastructure;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace BizStream.AspNetCore.ViewComponentAssets
+namespace BizStream.AspNetCore.ViewComponentAssets.TagHelpers
 {
     /// <summary> A <see cref="TagHelper"/> that provides a custom HTML element that renders <c>script</c> elements for any <see cref="ViewComponent"/>s that have been rendered thus far. </summary>
     [HtmlTargetElement( TagName, TagStructure = TagStructure.WithoutEndTag )]

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace BizStream.AspNetCore.ViewComponentAssets
+namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
 {
     /// <summary> Extensions to <see cref="ViewContext"/> for tracking assets of <see cref="ViewComponent"/>s rendering within the context. </summary>
     public static class ViewComponentAssetsViewContextExtensions

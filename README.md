@@ -1,6 +1,6 @@
 # mvc-component-assets ![License](https://img.shields.io/github/license/BizStream/mvc-component-assets) [![NuGet Version](https://img.shields.io/nuget/v/BizStream.AspNetCore.ViewComponentAssets)](https://nuget.org/packages/bizstream.aspnetcore.viewcomponentassets)
 
-Annotations and TagHelpers for rendering static assets (`.js`, `.css`) associated with ViewComponents.
+Attributes and TagHelpers for rendering static assets (`.js`) associated with ViewComponents.
 
 ## Usage
 
@@ -41,8 +41,10 @@ public void Configure( IApplicationBuilder app, IWebHostEnvironment environment 
 - Annotate a `ViewComponent`:
 
 ```csharp
-using BizStream.AspNetCore.ViewComponentAssets;
+using BizStream.AspNetCore.ViewComponentAssets.Annotations;
 using Microsoft.AspNetCore.Mvc;
+
+namespace MyComponents;
 
 [ViewComponentScript("/scripts/my-view-component.js")]
 public class MyViewComponent : ViewComponent
@@ -54,8 +56,8 @@ public class MyViewComponent : ViewComponent
 - Use TagHelpers in Views:
 
 ```cshtml
-
-@* ... *@
+@using MyComponents;
+@addTagHelper *, BizStream.AspNetCore.ViewComponentAssets
 
 <body>
   @(await Component.InvokeAsync<MyViewComponent>())
