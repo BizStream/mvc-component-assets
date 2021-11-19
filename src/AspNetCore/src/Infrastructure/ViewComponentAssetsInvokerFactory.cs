@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ViewComponents;
+﻿using BizStream.AspNetCore.ViewComponentAssets.Abstractions;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
 {
@@ -6,16 +7,26 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
     public class ViewComponentAssetsInvokerFactory : IViewComponentInvokerFactory
     {
         #region Fields
+        private readonly IViewComponentAssetsDescriptorProvider assetsDescriptorProvider;
         private readonly IViewComponentInvokerFactory defaultFactory;
         #endregion
 
-        public ViewComponentAssetsInvokerFactory( IViewComponentInvokerFactory defaultFactory )
+        public ViewComponentAssetsInvokerFactory(
+            IViewComponentAssetsDescriptorProvider assetsDescriptorProvider,
+            IViewComponentInvokerFactory defaultFactory
+        )
         {
+            if( assetsDescriptorProvider is null )
+            {
+                throw new ArgumentNullException( nameof( assetsDescriptorProvider ) );
+            }
+
             if( defaultFactory is null )
             {
                 throw new ArgumentNullException( nameof( defaultFactory ) );
             }
 
+            this.assetsDescriptorProvider = assetsDescriptorProvider;
             this.defaultFactory = defaultFactory;
         }
 
@@ -28,6 +39,7 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
             }
 
             return new ViewComponentAssetsInvoker(
+                assetsDescriptorProvider,
                 defaultFactory.CreateInstance( context )
             );
         }

@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-using BizStream.AspNetCore.ViewComponentAssets.Annotations;
-using Microsoft.AspNetCore.Http;
+﻿using BizStream.AspNetCore.ViewComponentAssets.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 
@@ -10,32 +8,38 @@ namespace BizStream.AspNetCore.ViewComponentAssets.Infrastructure
     public class ViewComponentAssetsInvoker : IViewComponentInvoker
     {
         #region Fields
+        private readonly IViewComponentAssetsDescriptorProvider assetsDescriptorProvider;
         private readonly IViewComponentInvoker defaultInvoker;
         #endregion
 
-        public ViewComponentAssetsInvoker( IViewComponentInvoker defaultInvoker )
+        public ViewComponentAssetsInvoker(
+            IViewComponentAssetsDescriptorProvider assetsDescriptorProvider,
+            IViewComponentInvoker defaultInvoker
+        )
         {
+            if( assetsDescriptorProvider is null )
+            {
+                throw new ArgumentNullException( nameof( assetsDescriptorProvider ) );
+            }
+
             if( defaultInvoker is null )
             {
                 throw new ArgumentNullException( nameof( defaultInvoker ) );
             }
 
+            this.assetsDescriptorProvider = assetsDescriptorProvider;
             this.defaultInvoker = defaultInvoker;
         }
 
-        private static void ExposeViewComponentAssets( ViewComponentContext context )
+        private void ExposeViewComponentAssets( ViewComponentContext context )
         {
-            context.ViewContext.AddViewComponentScripts(
-                GetViewComponentAssetPaths<ViewComponentScriptAttribute>( context.ViewComponentDescriptor )
-            );
-        }
+            var assets = assetsDescriptorProvider.GetAssetsDescriptor( context.ViewComponentDescriptor );
+            if( assets is null )
+            {
 
-        private static IEnumerable<PathString> GetViewComponentAssetPaths<TAssetAttribute>( ViewComponentDescriptor descriptor )
-            where TAssetAttribute : ViewComponentAssetAttribute
-        {
-            // TODO: A provider/custom 'Descriptor' that provides caching of reflection/enumerating?
-            return descriptor.TypeInfo.GetCustomAttributes<TAssetAttribute>( true )
-                .Select( assetAttribute => assetAttribute.Path );
+            }
+
+            context.ViewContext.AddViewComponentScripts( assets.Scripts );
         }
 
         /// <inheritdoc/>
